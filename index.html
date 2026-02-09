@@ -13,13 +13,21 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        /* Video Background Styling */
+        #bg-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1; /* Keep it behind everything */
+            object-fit: cover;
+            filter: brightness(40%); /* Darkened so text is readable */
+        }
+
         body {
             font-family: "Roboto Condensed", sans-serif;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                        url('https://imgur.com/TllrtCz.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background-color: black; /* Fallback color */
             min-height: 100vh;
             color: white;
             padding: 20px;
@@ -184,6 +192,10 @@
 </head>
 <body oncontextmenu="return false;">
 
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="https://files.catbox.moe/63vhpi.mp4" type="video/mp4">
+    </video>
+
     <header>
         <div class="title-wrapper">
             <h1 id="bannerTitle"></h1>
@@ -252,7 +264,7 @@
             }
         }
 
-        // --- 3. Full Video Data (Everything restored) ---
+        // --- 3. Full Video Data ---
         const goldMedalistVideos = [
             { title: "Ang pagsasama ni Maam sa kanyang Estudyante", label: "NEW", url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/1751b68a-2e07-42bd-bbb2-240dc27a59a0.mp4", poster: "https://imgur.com/v3m5sdS.jpg" },
             { title: "Magaling kumagod si Babae ni Jonatan", label: "HOT", url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/2f1e91cf-3b45-415e-8752-2cb88da43d21.mp4", poster: "https://imgur.com/leOcDcD.jpg" },
@@ -271,7 +283,8 @@
             { title: "Ateh pede paisa?", label: "HOT", url: "https://files.catbox.moe/j7yfcq.mp4", poster: "https://imgur.com/U0J7kwr.jpg" },
             { title: "Pare, si kumare nagwala sakin", label: "HOT", url: "https://files.catbox.moe/159mue.mp4", poster: "https://imgur.com/cJXsHKv.jpg" },
             { title: "Kuya wala akong pambayad", label: "HOT", url: "https://files.catbox.moe/gzlfqh.mp4", poster: "https://imgur.com/DNQYYUA.jpg" },
-            { title: "Kuyah samahan moko", label: "HOT", url: "https://files.catbox.moe/j7yfcq.mp4", poster: "https://imgur.com/DVluYsQ.jpg" }
+            { title: "Kuyah samahan moko", label: "HOT", url: "https://files.catbox.moe/j7yfcq.mp4", poster: "https://imgur.com/DVluYsQ.jpg" },
+            { title: "Nagpa hiwa nanaman si Inday kay manong", label: "HOT", url: "https://files.catbox.moe/ry482t.mp4", poster: "https://imgur.com/IIiKl9a.jpg"},
         ];
 
         function createVideoCard(v) {
