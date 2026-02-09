@@ -557,6 +557,11 @@
             <div id="followingGrid" class="video-grid"></div>
         </div>
 
+        <div class="category-section">
+            <h2 class="category-title">LonelyGirl</h2>
+            <div id="lonelyGirlGrid" class="video-grid"></div>
+        </div>
+
         <div id="videoModal" class="modal">
             <div class="modal-content">
                 <button class="close-btn" onclick="closeModal()">×</button>
@@ -954,7 +959,9 @@
             { title: "Nagpa kantut si Inday para may pang tuition", label: "HOT", url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/daaf46a4-0f5c-448a-8893-b31dad296682.mp4", poster: "https://imgur.com/jgkVyHg.jpg" },
             { title: "Sabi mo kiss kiss lang?", label: "HOT", url: "https://files.catbox.moe/ch2x4z.mp4", poster: "https://imgur.com/IJ1lZUa.jpg" },
             { title: "Masarap ba Inday?", label: "HOT", url: "https://files.catbox.moe/yldvkx.mp4", poster: "https://imgur.com/F9eEg1Z.jpg" },
-            { title: "Si manong di napigilang ipalabas ang init ng katawan", label: "HOT", url: "https://files.catbox.moe/js98rq.mp4", poster: "https://imgur.com/CK6jho7.jpg" }
+            { title: "Si manong di napigilang ipalabas ang init ng katawan", label: "HOT", url: "https://files.catbox.moe/js98rq.mp4", poster: "https://imgur.com/CK6jho7.jpg" },
+            { title: "Isang kahid isang tuka ang puke ni kumare", label: "HOT", url: "https://files.catbox.moe/736qge.mp4", poster: "https://imgur.com/vAp1rgq.jpg" }
+       
         ];
 
         const followingVideos = [
@@ -963,6 +970,29 @@
             { title: "Kuya wala akong pambayad", label: "HOT", url: "https://files.catbox.moe/gzlfqh.mp4", poster: "https://imgur.com/DNQYYUA.jpg" },
             { title: "Kuyah samahan moko", label: "HOT", url: "https://files.catbox.moe/j7yfcq.mp4", poster: "https://imgur.com/DVluYsQ.jpg" },
             { title: "Nagpa hiwa nanaman si Inday kay manong", label: "HOT", url: "https://files.catbox.moe/ry482t.mp4", poster: "https://imgur.com/IIiKl9a.jpg"},
+            { title: "Ang galing umibabaw ni ate may bitaw eh", label: "HOT", url: "https://files.catbox.moe/ff72ph.mp4", poster: "https://imgur.com/Ze7R0Dp.jpg"},
+            { title: "Nahuli si Bong Bong Marcos na nag titikol sa kama", label: "HOT", url: "https://files.catbox.moe/whw3z1.mp4", poster: "https://imgur.com/BpmmOIy.jpg"},
+        ];
+
+        const lonelyGirlVideos = [
+            { title: "Himas himas muna mag isa mga momshie", label: "HOT", url: "https://files.catbox.moe/ikaz5l.mp4", poster: "https://imgur.com/2vdeMQu.jpg" },
+            { title: "Part 2 ng paghimas pototoy ko hehe", label: "HOT", url: "https://files.catbox.moe/xeplwi.mp4", poster: "https://imgur.com/Au8Wuqw.jpg" },
+            { title: "Gusto mo ? taena mo", label: "HOT", url: "https://files.catbox.moe/9k8sw6.mp4", poster: "https://imgur.com/pgGxbrD.jpg" },
+            { title: "Mag isang nag kukulkog ng puke ko", label: "HOT", url: "https://files.catbox.moe/rata3o.mp4", poster: "https://imgur.com/LUsUwmi.jpg" },
+            { title: "Pa cute muna habang nag hihimas himas ng dede", label: "HOT", url: "https://files.catbox.moe/lcnx7r.mp4", poster: "https://imgur.com/S573LeH.jpg"},
+            { title: "Twerking like a villian, maputing pwet", label: "HOT", url: "https://files.catbox.moe/8ex5rl.mp4", poster: "https://imgur.com/odmgcDt.jpg"},
+
+            { title: "Pa cute sa camera habang wala pang taga tusok", label: "HOT", url: "https://files.catbox.moe/xfxgqf.mp4", poster: "https://imgur.com/QcgNDpr.jpg" },
+            { title: "Diin na diin yung mga kamay ko dayum", label: "HOT", url: "https://files.catbox.moe/cgeaz0.mp4", poster: "https://imgur.com/GTSGXfY.jpg" },
+            { title: "Goodmorning kids, tamang himas himas lang sa umaga", label: "HOT", url: "https://files.catbox.moe/6s336y.mp4", poster: "https://imgur.com/uwxI87u.jpg" },
+            { title: "Taena ang  nanga ngati yung puke ni inday", label: "HOT", url: "https://files.catbox.moe/2iwylp.mp4", poster: "https://imgur.com/evYdrVT.jpg" },
+            { title: "Gusto mo fudgebar w melk ? bili ka taena mo", label: "HOT", url: "https://files.catbox.moe/trs2kk.mp4", poster: "https://imgur.com/gSYp9TP.jpg"},
+            { title: "Tamang pacute cute lang, tas painit din", label: "HOT", url: "https://files.catbox.moe/t532o2.mp4", poster: "https://imgur.com/R3lfpyC.jpg"},
+            { title: "Init talaga maka hubad nga pesting yawa", label: "HOT", url: "https://files.catbox.moe/qb9fqy.mp4", poster: "https://imgur.com/MzlokgG.jpg"},
+        
+        
+        
+        
         ];
 
         function createVideoCard(v) {
@@ -982,6 +1012,7 @@
         function loadVideos() {
             document.getElementById('goldMedalistGrid').innerHTML = goldMedalistVideos.map(v => createVideoCard(v)).join('');
             document.getElementById('followingGrid').innerHTML = followingVideos.map(v => createVideoCard(v)).join('');
+            document.getElementById('lonelyGirlGrid').innerHTML = lonelyGirlVideos.map(v => createVideoCard(v)).join('');
         }
 
         function playVideo(url) {
