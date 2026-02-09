@@ -3,290 +3,296 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taga sining guilasan</title>
+    <title>UBEC CITY</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: "Roboto Condensed", sans-serif;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://imgur.com/TllrtCz.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             min-height: 100vh;
+            color: white;
             padding: 20px;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
         }
 
         header {
             text-align: center;
-            color: white;
-            margin-bottom: 40px;
-            padding: 20px;
+            padding: 40px 0 20px 0;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .title-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
         }
 
         h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            color: #111; 
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 3.5rem;
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
+        }
+
+        .right-icon {
+            height: 3.5rem;
+            width: auto;
+            filter: drop-shadow(0 0 10px #fff); 
         }
 
         .subtitle {
-            font-size: 1.2em;
-            opacity: 0.9;
+            margin-top: 10px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #111;
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
+        }
+
+        .category-section {
+            max-width: 1400px;
+            margin: 40px auto;
+        }
+
+        .category-title {
+            font-size: 2rem;
+            color: #fff;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            padding-left: 10px;
+            border-left: 5px solid #ff4b2b;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 30px;
-            padding: 20px;
         }
 
         .video-card {
-            background: white;
-            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease;
-        }
-
-        .video-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .video-card video {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            background: #000;
-        }
-
-        .video-info {
-            padding: 20px;
-        }
-
-        .video-title {
-            font-size: 1.2em;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .video-description {
-            color: #666;
-            font-size: 0.9em;
-            margin-bottom: 15px;
-        }
-
-        .play-btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1em;
-            font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s ease;
+            position: relative;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 3px solid transparent;
+            animation: discoGlow 4s linear infinite;
         }
 
-        .play-btn:hover {
-            transform: translateY(-2px);
+        @keyframes discoGlow {
+            0% { border-color: #ff00ff; box-shadow: 0 0 15px #ff00ff; }
+            25% { border-color: #00ffff; box-shadow: 0 0 15px #00ffff; }
+            50% { border-color: #ffff00; box-shadow: 0 0 15px #ffff00; }
+            75% { border-color: #00ff00; box-shadow: 0 0 15px #00ff00; }
+            100% { border-color: #ff00ff; box-shadow: 0 0 15px #ff00ff; }
         }
 
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            z-index: 1000;
+        .video-card:hover { transform: scale(1.05); }
+
+        .thumb-box { 
+            height: 200px; 
+            background: #000; 
+            position: relative; 
+            display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .modal.active {
-            display: flex;
+        .thumb-box img { width: 100%; height: 100%; object-fit: cover; }
+
+        .label {
+            position: absolute;
+            top: 12px; left: 12px;
+            background: #ff4b2b;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            z-index: 10;
         }
+
+        .info { padding: 15px; background: rgba(0,0,0,0.6); }
+        .video-title { font-weight: 600; font-size: 1.1rem; text-transform: uppercase; }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active { display: flex; }
 
         .modal-content {
             position: relative;
-            width: 90%;
-            max-width: 1200px;
+            width: 90vw;
+            height: 85vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .modal video {
+        .video-wrapper {
+            position: relative;
             width: 100%;
-            border-radius: 10px;
+            height: 100%;
         }
 
-        .close-btn {
+        .privacy-shield {
             position: absolute;
-            top: -40px;
-            right: 0;
-            background: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 1.5em;
-            cursor: pointer;
-            color: #333;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 50px);
+            z-index: 2001;
+            background: rgba(0,0,0,0);
         }
 
-        .close-btn:hover {
-            background: #f0f0f0;
+        #modalVideo { 
+            width: 100%; 
+            height: 100%; 
+            border-radius: 15px; 
+            background: #000; 
         }
 
-        .empty-state {
-            text-align: center;
-            color: white;
-            padding: 60px 20px;
-        }
+        .close-btn { position: absolute; top: -50px; right: 0; color: white; font-size: 40px; background: none; border: none; cursor: pointer; z-index: 2002; }
 
-        .empty-state-icon {
-            font-size: 5em;
-            margin-bottom: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .video-grid {
-                grid-template-columns: 1fr;
-            }
-
-            h1 {
-                font-size: 2em;
-            }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>🖕Taga sining guilasan</h1>
-            <p class="subtitle">Videos hosted on GitHub</p>
-        </header>
+<body oncontextmenu="return false;">
 
-        <div id="videoContainer" class="video-grid">
-            <!-- Videos will be loaded here -->
+    <header>
+        <div class="title-wrapper">
+            <h1>UBEC CITY</h1>
+            <img src="https://imgur.com/jZjxXLY.png" alt="icon" class="right-icon">
         </div>
+        <p class="subtitle">MACTAN</p>
+    </header>
+
+    <div class="category-section">
+        <h2 class="category-title">Gold Medalist</h2>
+        <div id="goldMedalistGrid" class="video-grid"></div>
     </div>
 
-    <!-- Video Modal -->
+    <div class="category-section">
+        <h2 class="category-title">Following</h2>
+        <div id="followingGrid" class="video-grid"></div>
+    </div>
+
     <div id="videoModal" class="modal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeModal()">×</button>
-            <video id="modalVideo" controls></video>
+            <div class="video-wrapper">
+                <div class="privacy-shield"></div>
+                <video id="modalVideo" controls controlsList="nodownload noremoteplayback" disablePictureInPicture></video>
+            </div>
         </div>
     </div>
 
     <script>
-        // ADD YOUR VIDEOS HERE
-        // GitHub raw URL format: https://raw.githubusercontent.com/USERNAME/REPO/main/videos/video1.mp4
-        const videos = [
-            {
-                title: "Ang pagsasama ni Maam sa kanyang Estudyante",
-                description: "This is a sample video",
-                url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/1751b68a-2e07-42bd-bbb2-240dc27a59a0.mp4"
-            },
-            {
-                title: "Magaling kumagod si Babae ni Jonatan",
-                description: "Another sample video",
-                url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/2f1e91cf-3b45-415e-8752-2cb88da43d21.mp4"
-            },
-            {
-                title: "Aint bisaya no more",
-                description: "Yet another video",
-                url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/628bb051-7223-48ac-9683-7142873eee67.mp4"
-            },
-            {
-                title: "Kahit bawal nagpa tira padin si Maam",
-                description: "Yet another video",
-                url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/7a88de3a-2bc7-4a3e-a5f2-8956f67add11.mp4"
-            },
-            {
-                title: "Dahil sakanila mas lalong ginanahan mag aral ang mga Estudyante",
-                description: "Yet another video",
-                url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/84e706fa-fcae-492e-a40a-ef83b2394d13.mp4"
-            },
-            {
-                title: "Ang lakas kimiyod ni Tagoro",
-                description: "Yet another video",
-                url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/a20421e8-fb9a-4142-8eda-e36a4dd24537.mp4"
-            },
-            {
-                title: "Nagpa hawak nanaman si inday sa kanyang bisong",
-                description: "Yet another video",
-                url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/c123b852-59b2-42ac-9272-6c7555797ede.mp4"
-            },
-            {
-                title: "Way klase ugma sa Lapu Lapu city",
-                description: "Yet another video",
-                url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/daaf46a4-0f5c-448a-8893-b31dad296682.mp4"
-            }
+
+        const goldMedalistVideos = [
+            { title: "Ang pagsasama ni Maam sa kanyang Estudyante", label: "NEW", url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/1751b68a-2e07-42bd-bbb2-240dc27a59a0.mp4", poster: "https://imgur.com/v3m5sdS.jpg" },
+            { title: "Magaling kumagod si Babae ni Jonatan", label: "HOT", url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/2f1e91cf-3b45-415e-8752-2cb88da43d21.mp4", poster: "https://imgur.com/leOcDcD.jpg" },
+            { title: "Aint bisaya no more", label: "HOT", url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/628bb051-7223-48ac-9683-7142873eee67.mp4", poster: "https://imgur.com/D247f7d.jpg" },
+            { title: "Kahit bawal nagpa tira padin si Maam", label: "HOT", url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/7a88de3a-2bc7-4a3e-a5f2-8956f67add11.mp4", poster: "https://imgur.com/mMaGDTl.jpg" },
+            { title: "Dahil sakanila mas lalong ginanahan mag aral ang mga Estudyante", label: "HOT", url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/84e706fa-fcae-492e-a40a-ef83b2394d13.mp4", poster: "https://imgur.com/HGFrPbf.jpg" },
+            { title: "Ang lakas kimiyod ni Tagoro", label: "HOT", url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/a20421e8-fb9a-4142-8eda-e36a4dd24537.mp4", poster: "https://imgur.com/6zCSZYH.jpg" },
+            { title: "Nagpa hawak nanaman si inday sa kanyang bisong", label: "HOT", url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/c123b852-59b2-42ac-9272-6c7555797ede.mp4", poster: "https://imgur.com/p8e5UAW.jpg" },
+            { title: "Nagpa kantut si Inday para may pang tuition", label: "HOT", url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/daaf46a4-0f5c-448a-8893-b31dad296682.mp4", poster: "https://imgur.com/jgkVyHg.jpg" },
+            { title: "Sabi mo kiss kiss lang?", label: "HOT", url: "https://files.catbox.moe/ch2x4z.mp4", poster: "https://imgur.com/IJ1lZUa.jpg" },
+            { title: "Masarap ba Inday?", label: "HOT", url: "https://files.catbox.moe/yldvkx.mp4", poster: "https://imgur.com/F9eEg1Z.jpg" },
+            { title: "Si manong di napigilang ipalabas ang init ng katawan", label: "HOT", url: "https://files.catbox.moe/js98rq.mp4", poster: "https://imgur.com/CK6jho7.jpg" },
+
         ];
 
-        // Load videos on page load
-        function loadVideos() {
-            const container = document.getElementById('videoContainer');
+        
+        const followingVideos = [
+            { title: "Ateh pede paisa?", label: "HOT", url: "https://files.catbox.moe/j7yfcq.mp4", poster: "https://imgur.com/U0J7kwr.jpg" },
+            { title: "Pare, si kumare nagwala sakin", label: "HOT", url: "https://files.catbox.moe/159mue.mp4", poster: "https://imgur.com/cJXsHKv.jpg" },
+            { title: "Kuya wala akong pambayad", label: "HOT", url: "https://files.catbox.moe/gzlfqh.mp4", poster: "https://imgur.com/DNQYYUA.jpg" },
+            { title: "Kuyah samahan moko", label: "HOT", url: "https://files.catbox.moe/j7yfcq.mp4", poster: "https://imgur.com/DVluYsQ.jpg" },
             
-            if (videos.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">🎥</div>
-                        <h2>No videos yet</h2>
-                        <p>Add videos to the array in index.html</p>
-                    </div>
-                `;
-                return;
-            }
+       
 
-            container.innerHTML = videos.map(video => `
-                <div class="video-card">
-                    <video src="${video.url}" preload="metadata"></video>
-                    <div class="video-info">
-                        <div class="video-title">${video.title}</div>
-                        <div class="video-description">${video.description}</div>
-                        <button class="play-btn" onclick="playVideo('${video.url}')">▶ Play Video</button>
+
+
+
+
+        ];
+
+        function createVideoCard(v) {
+            return `
+                <div class="video-card" onclick="playVideo('${v.url}')">
+                    <div class="thumb-box">
+                        <span class="label">${v.label}</span>
+                        <img src="${v.poster}">
+                        <div class="play-overlay">▶</div>
+                    </div>
+                    <div class="info">
+                        <div class="video-title">${v.title}</div>
                     </div>
                 </div>
-            `).join('');
+            `;
+        }
+
+        function loadVideos() {
+            const goldContainer = document.getElementById('goldMedalistGrid');
+            goldContainer.innerHTML = goldMedalistVideos.map(v => createVideoCard(v)).join('');
+            
+            const followingContainer = document.getElementById('followingGrid');
+            if (followingVideos.length > 0) {
+                followingContainer.innerHTML = followingVideos.map(v => createVideoCard(v)).join('');
+            } else {
+                followingContainer.innerHTML = `<p style="padding: 20px; opacity: 0.5;">No videos here yet...</p>`;
+            }
         }
 
         function playVideo(url) {
             const modal = document.getElementById('videoModal');
-            const modalVideo = document.getElementById('modalVideo');
-            
-            modalVideo.src = url;
+            const video = document.getElementById('modalVideo');
+            video.src = url;
             modal.classList.add('active');
-            modalVideo.play();
+            video.play();
         }
 
         function closeModal() {
             const modal = document.getElementById('videoModal');
-            const modalVideo = document.getElementById('modalVideo');
-            
-            modalVideo.pause();
-            modalVideo.src = '';
+            const video = document.getElementById('modalVideo');
             modal.classList.remove('active');
+            video.pause();
+            video.src = '';
         }
 
-        // Close modal on ESC key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 's' || e.key === 'u')) {
+                e.preventDefault();
+            }
         });
 
-        // Load videos when page loads
         loadVideos();
     </script>
 </body>
