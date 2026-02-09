@@ -410,12 +410,18 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
         }
 
         .video-wrapper {
             position: relative;
             width: 100%;
             height: 100%;
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
         }
 
         .privacy-shield {
@@ -423,28 +429,230 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: calc(100% - 50px);
+            height: 0;
             z-index: 2001;
-            background: rgba(0,0,0,0);
+            background: none;
+            pointer-events: none;
         }
 
         #modalVideo { 
             width: 100%; 
             height: 100%; 
             border-radius: 15px; 
-            background: #000; 
+            background: #000;
+            object-fit: contain;
+        }
+
+        /* Custom Video Controls */
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 30%, rgba(0,0,0,0.9) 100%);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2002;
+        }
+
+        .video-wrapper:hover .video-controls,
+        .video-controls:hover {
+            opacity: 1;
+        }
+
+        .play-pause-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .play-pause-btn:hover {
+            background: rgba(255,255,255,0.1);
+            transform: scale(1.1);
+        }
+
+        .progress-container {
+            flex: 1;
+            height: 6px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-container.scrubbing {
+            cursor: grabbing;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ff4b2b 0%, #ff6b6b 100%);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.1s ease;
+            position: relative;
+        }
+
+        .progress-bar.scrubbing {
+            transition: none;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255,75,43,0.5);
+        }
+
+        .time-display {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 500;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .volume-slider {
+            width: 80px;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 2px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .volume-level {
+            height: 100%;
+            background: #fff;
+            border-radius: 2px;
+            width: 70%;
+        }
+
+        .control-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: rgba(255,255,255,0.1);
+            transform: scale(1.1);
+        }
+
+        /* Center Play Button Overlay */
+        .center-play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 2003;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .video-wrapper:hover .center-play-overlay {
+            opacity: 1;
+        }
+
+        .center-play-overlay:hover {
+            background: rgba(255,75,43,0.8);
+            transform: translate(-50%, -50%) scale(1.1);
+            border-color: #fff;
+        }
+
+        .center-play-icon {
+            font-size: 32px;
+            color: #fff;
+            margin-left: 3px;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,255,255,0.2);
+            border-top: 3px solid #ff4b2b;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            z-index: 2003;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
         .close-btn { 
             position: absolute; 
-            top: -50px; 
-            right: 0; 
+            top: 15px; 
+            right: 15px; 
             color: white; 
-            font-size: 40px; 
-            background: none; 
+            font-size: 32px; 
+            background: rgba(0,0,0,0.7);
             border: none; 
             cursor: pointer; 
-            z-index: 2002; 
+            z-index: 2004;
+            transition: all 0.3s ease;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            background: rgba(255,75,43,0.8);
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -458,7 +666,7 @@
     <div id="authOverlay" class="auth-overlay">
         <div class="auth-container">
             <div class="auth-header">
-                <h2>🔐 PAUTOG Access</h2>
+                <h2>🔐 BELAT Access</h2>
             </div>
 
             <div class="auth-tabs">
@@ -567,7 +775,36 @@
                 <button class="close-btn" onclick="closeModal()">×</button>
                 <div class="video-wrapper">
                     <div class="privacy-shield"></div>
-                    <video id="modalVideo" controls controlsList="nodownload noremoteplayback" disablePictureInPicture></video>
+                    <video id="modalVideo" controlsList="nodownload noremoteplayback" disablePictureInPicture></video>
+                    
+                    <!-- Custom Video Controls -->
+                    <div class="video-controls">
+                        <button class="play-pause-btn" id="playPauseBtn">▶</button>
+                        
+                        <div class="progress-container" id="progressContainer">
+                            <div class="progress-bar" id="progressBar"></div>
+                        </div>
+                        
+                        <span class="time-display" id="timeDisplay">0:00 / 0:00</span>
+                        
+                        <div class="volume-control">
+                            <button class="control-btn" id="volumeBtn">🔊</button>
+                            <div class="volume-slider" id="volumeSlider">
+                                <div class="volume-level" id="volumeLevel"></div>
+                            </div>
+                        </div>
+                        
+                        <button class="control-btn" id="settingsBtn">⚙️</button>
+                        <button class="control-btn" id="fullscreenBtn">⛶</button>
+                    </div>
+                    
+                    <!-- Center Play Button -->
+                    <div class="center-play-overlay" id="centerPlayBtn">
+                        <span class="center-play-icon">▶</span>
+                    </div>
+                    
+                    <!-- Loading Spinner -->
+                    <div class="loading-spinner" id="loadingSpinner"></div>
                 </div>
             </div>
         </div>
@@ -956,8 +1193,8 @@
             { title: "Dahil sakanila mas lalong ginanahan mag aral ang mga Estudyante", label: "HOT", url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/84e706fa-fcae-492e-a40a-ef83b2394d13.mp4", poster: "https://imgur.com/HGFrPbf.jpg" },
             { title: "Ang lakas kumiyod ni Tagoro", label: "HOT", url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/a20421e8-fb9a-4142-8eda-e36a4dd24537.mp4", poster: "https://imgur.com/6zCSZYH.jpg" },
             { title: "Nagpa hawak nanaman si inday sa kanyang bisong", label: "HOT", url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/c123b852-59b2-42ac-9272-6c7555797ede.mp4", poster: "https://imgur.com/p8e5UAW.jpg" },
-            { title: "Nagpa kantut si Inday para may pang tuition", label: "HOT", url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/daaf46a4-0f5c-448a-8893-b31dad296682.mp4", poster: "https://imgur.com/jgkVyHg.jpg" },
-            { title: "Sabi mo kiss kiss lang?", label: "HOT", url: "https://files.catbox.moe/ch2x4z.mp4", poster: "https://imgur.com/IJ1lZUa.jpg" },
+            { title: "Nagpa kantut si Inday para may pang tuition", label: "HOT", url: "https://files.catbox.moe/ch2x4z.mp4", poster: "https://imgur.com/jgkVyHg.jpg" },
+            { title: "Sabi mo kiss kiss lang?", label: "HOT", url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/daaf46a4-0f5c-448a-8893-b31dad296682.mp4", poster: "https://imgur.com/IJ1lZUa.jpg" },
             { title: "Masarap ba Inday?", label: "HOT", url: "https://files.catbox.moe/yldvkx.mp4", poster: "https://imgur.com/F9eEg1Z.jpg" },
             { title: "Si manong di napigilang ipalabas ang init ng katawan", label: "HOT", url: "https://files.catbox.moe/js98rq.mp4", poster: "https://imgur.com/CK6jho7.jpg" },
             { title: "Isang kahid isang tuka ang puke ni kumare", label: "HOT", url: "https://files.catbox.moe/736qge.mp4", poster: "https://imgur.com/vAp1rgq.jpg" }
@@ -1020,6 +1257,18 @@
             const video = document.getElementById('modalVideo');
             video.src = url;
             modal.classList.add('active');
+            
+            // Initialize custom controls
+            initVideoControls();
+            
+            // Show loading spinner briefly
+            const spinner = document.getElementById('loadingSpinner');
+            spinner.style.display = 'block';
+            
+            video.addEventListener('loadeddata', () => {
+                spinner.style.display = 'none';
+            });
+            
             video.play();
         }
 
@@ -1029,6 +1278,195 @@
             modal.classList.remove('active');
             video.pause();
             video.src = '';
+        }
+
+        // Enhanced Video Controls
+        function initVideoControls() {
+            const video = document.getElementById('modalVideo');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const centerPlayBtn = document.getElementById('centerPlayBtn');
+            const progressBar = document.getElementById('progressBar');
+            const progressContainer = document.getElementById('progressContainer');
+            const timeDisplay = document.getElementById('timeDisplay');
+            const volumeBtn = document.getElementById('volumeBtn');
+            const volumeSlider = document.getElementById('volumeSlider');
+            const volumeLevel = document.getElementById('volumeLevel');
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+
+            // Play/Pause functionality
+            function togglePlayPause() {
+                if (video.paused) {
+                    video.play();
+                    playPauseBtn.textContent = '⏸';
+                    centerPlayBtn.style.display = 'none';
+                } else {
+                    video.pause();
+                    playPauseBtn.textContent = '▶';
+                    centerPlayBtn.style.display = 'flex';
+                }
+            }
+
+            playPauseBtn.addEventListener('click', togglePlayPause);
+            centerPlayBtn.addEventListener('click', togglePlayPause);
+
+            // Enhanced Progress Bar with Drag Support
+            let isScrubbing = false;
+
+            function updateSeek(e) {
+                const rect = progressContainer.getBoundingClientRect();
+                let x = e.clientX - rect.left;
+                if (x < 0) x = 0;
+                if (x > rect.width) x = rect.width;
+                const percentage = x / rect.width;
+                const seekTime = percentage * video.duration;
+                
+                if (!isNaN(seekTime) && isFinite(seekTime)) {
+                    video.currentTime = seekTime;
+                    progressBar.style.width = percentage + '%';
+                }
+            }
+
+            progressContainer.addEventListener('mousedown', (e) => {
+                isScrubbing = true;
+                progressContainer.classList.add('scrubbing');
+                progressBar.classList.add('scrubbing');
+                
+                // Update seek immediately on click
+                const rect = progressContainer.getBoundingClientRect();
+                let x = e.clientX - rect.left;
+                if (x < 0) x = 0;
+                if (x > rect.width) x = rect.width;
+                const percentage = x / rect.width;
+                const seekTime = percentage * video.duration;
+                
+                if (!isNaN(seekTime) && isFinite(seekTime)) {
+                    video.currentTime = seekTime;
+                    progressBar.style.width = percentage + '%';
+                }
+                
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isScrubbing) {
+                    updateSeek(e);
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isScrubbing) {
+                    isScrubbing = false;
+                    progressContainer.classList.remove('scrubbing');
+                    progressBar.classList.remove('scrubbing');
+                }
+            });
+
+            // Update progress bar
+            video.addEventListener('timeupdate', () => {
+                if (!isScrubbing && video.duration) {
+                    const progress = (video.currentTime / video.duration) * 100;
+                    progressBar.style.width = progress + '%';
+                }
+                
+                const currentMinutes = Math.floor(video.currentTime / 60);
+                const currentSeconds = Math.floor(video.currentTime % 60).toString().padStart(2, '0');
+                const durationMinutes = Math.floor(video.duration / 60) || 0;
+                const durationSeconds = Math.floor(video.duration % 60).toString().padStart(2, '0') || '00';
+                
+                timeDisplay.textContent = `${currentMinutes}:${currentSeconds} / ${durationMinutes}:${durationSeconds}`;
+            });
+
+            // Touch support for mobile
+            progressContainer.addEventListener('touchstart', (e) => {
+                isScrubbing = true;
+                progressContainer.classList.add('scrubbing');
+                progressBar.classList.add('scrubbing');
+                
+                // Update seek immediately on touch
+                const rect = progressContainer.getBoundingClientRect();
+                const touch = e.touches[0];
+                let x = touch.clientX - rect.left;
+                if (x < 0) x = 0;
+                if (x > rect.width) x = rect.width;
+                const percentage = x / rect.width;
+                const seekTime = percentage * video.duration;
+                
+                if (!isNaN(seekTime) && isFinite(seekTime)) {
+                    video.currentTime = seekTime;
+                    progressBar.style.width = percentage + '%';
+                }
+                
+                e.preventDefault();
+            });
+
+            document.addEventListener('touchmove', (e) => {
+                if (isScrubbing) {
+                    const touch = e.touches[0];
+                    updateSeek(touch);
+                }
+            });
+
+            document.addEventListener('touchend', () => {
+                if (isScrubbing) {
+                    isScrubbing = false;
+                    progressContainer.classList.remove('scrubbing');
+                    progressBar.classList.remove('scrubbing');
+                }
+            });
+
+            // Volume controls
+            volumeBtn.addEventListener('click', () => {
+                if (video.muted) {
+                    video.muted = false;
+                    volumeBtn.textContent = '🔊';
+                    volumeLevel.style.width = (video.volume * 100) + '%';
+                } else {
+                    video.muted = true;
+                    volumeBtn.textContent = '🔇';
+                    volumeLevel.style.width = '0%';
+                }
+            });
+
+            volumeSlider.addEventListener('click', (e) => {
+                const rect = volumeSlider.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const percentage = x / rect.width;
+                video.volume = percentage;
+                volumeLevel.style.width = (percentage * 100) + '%';
+                video.muted = false;
+                volumeBtn.textContent = '🔊';
+            });
+
+            // Fullscreen
+            fullscreenBtn.addEventListener('click', () => {
+                const modal = document.getElementById('videoModal');
+                if (!document.fullscreenElement) {
+                    modal.requestFullscreen();
+                    fullscreenBtn.textContent = '⛶';
+                } else {
+                    document.exitFullscreen();
+                    fullscreenBtn.textContent = '⛶';
+                }
+            });
+
+            // Show/hide center play button
+            video.addEventListener('play', () => {
+                centerPlayBtn.style.display = 'none';
+            });
+
+            video.addEventListener('pause', () => {
+                if (video.currentTime > 0 && !video.ended) {
+                    centerPlayBtn.style.display = 'flex';
+                }
+            });
+
+            video.addEventListener('ended', () => {
+                playPauseBtn.textContent = '▶';
+                centerPlayBtn.style.display = 'flex';
+            });
+
+            // Initialize volume
+            volumeLevel.style.width = (video.volume * 100) + '%';
         }
 
         function initMainContent() {
