@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UBEC CITY</title>
-    
-    <link rel="icon" type="image/png" href="https://imgur.com/PGXUHWG.png">
+    <title>BELAT</title>
+    <link rel="icon" type="image/png" href="https://imgur.com/h3v8xJA.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,7 +28,6 @@
         header {
             text-align: center;
             padding: 40px 0 20px 0;
-            animation: fadeInDown 0.8s ease;
         }
 
         .title-wrapper {
@@ -47,6 +45,11 @@
             letter-spacing: 2px;
             font-size: 3.5rem;
             text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
+            min-height: 4.2rem;
+            border-right: 4px solid #ff4b2b;
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
         }
 
         .right-icon {
@@ -177,18 +180,13 @@
         }
 
         .close-btn { position: absolute; top: -50px; right: 0; color: white; font-size: 40px; background: none; border: none; cursor: pointer; z-index: 2002; }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
     <header>
         <div class="title-wrapper">
-            <h1>UBEC CITY</h1>
+            <h1 id="bannerTitle"></h1>
             <img src="https://imgur.com/jZjxXLY.png" alt="icon" class="right-icon">
         </div>
         <p class="subtitle">MACTAN</p>
@@ -215,6 +213,46 @@
     </div>
 
     <script>
+        // --- 1. Banner Looping Typing (3s Delay) ---
+        const bannerText = "UBEC CITY";
+        const bannerEl = document.getElementById('bannerTitle');
+        let bIndex = 0;
+
+        function typeBanner() {
+            if (bIndex < bannerText.length) {
+                bannerEl.textContent += bannerText.charAt(bIndex);
+                bIndex++;
+                setTimeout(typeBanner, 120);
+            } else {
+                setTimeout(() => {
+                    bannerEl.textContent = "";
+                    bIndex = 0;
+                    typeBanner();
+                }, 3000);
+            }
+        }
+
+        // --- 2. Tab Title Looping Typing (2s Delay) ---
+        const tabTexts = ["BELAT", "KAYAT", "LUSO", "NILAPAAY"];
+        let tabIdx = 0;
+        let charTabIdx = 0;
+
+        function typeTabTitle() {
+            let currentWord = tabTexts[tabIdx];
+            if (charTabIdx <= currentWord.length) {
+                document.title = currentWord.substring(0, charTabIdx);
+                charTabIdx++;
+                setTimeout(typeTabTitle, 150);
+            } else {
+                setTimeout(() => {
+                    charTabIdx = 0;
+                    tabIdx = (tabIdx + 1) % tabTexts.length;
+                    typeTabTitle();
+                }, 2000);
+            }
+        }
+
+        // --- 3. Full Video Data (Everything restored) ---
         const goldMedalistVideos = [
             { title: "Ang pagsasama ni Maam sa kanyang Estudyante", label: "NEW", url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/1751b68a-2e07-42bd-bbb2-240dc27a59a0.mp4", poster: "https://imgur.com/v3m5sdS.jpg" },
             { title: "Magaling kumagod si Babae ni Jonatan", label: "HOT", url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/2f1e91cf-3b45-415e-8752-2cb88da43d21.mp4", poster: "https://imgur.com/leOcDcD.jpg" },
@@ -247,20 +285,12 @@
                     <div class="info">
                         <div class="video-title">${v.title}</div>
                     </div>
-                </div>
-            `;
+                </div>`;
         }
 
         function loadVideos() {
-            const goldContainer = document.getElementById('goldMedalistGrid');
-            goldContainer.innerHTML = goldMedalistVideos.map(v => createVideoCard(v)).join('');
-            
-            const followingContainer = document.getElementById('followingGrid');
-            if (followingVideos.length > 0) {
-                followingContainer.innerHTML = followingVideos.map(v => createVideoCard(v)).join('');
-            } else {
-                followingContainer.innerHTML = `<p style="padding: 20px; opacity: 0.5;">No videos here yet...</p>`;
-            }
+            document.getElementById('goldMedalistGrid').innerHTML = goldMedalistVideos.map(v => createVideoCard(v)).join('');
+            document.getElementById('followingGrid').innerHTML = followingVideos.map(v => createVideoCard(v)).join('');
         }
 
         function playVideo(url) {
@@ -279,13 +309,15 @@
             video.src = '';
         }
 
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && (e.key === 's' || e.key === 'u')) {
-                e.preventDefault();
-            }
-        });
+        window.onload = () => {
+            typeBanner();
+            typeTabTitle();
+            loadVideos();
+        };
 
-        loadVideos();
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey && (e.key === 's' || e.key === 'u')) e.preventDefault();
+        });
     </script>
 </body>
 </html>
